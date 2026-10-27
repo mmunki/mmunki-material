@@ -1,5 +1,8 @@
 package tw.mmunki.material;
 
+/**
+ * Material 3 corner scale, expressed in density-independent pixels.
+ */
 public final class MShapes {
 
     public final float small;
@@ -16,8 +19,8 @@ public final class MShapes {
         this.pill = pill;
     }
 
-    public static MShapes aurora() {
-        return new MShapes(12f, 18f, 26f, 34f, 500f);
+    public static MShapes standard() {
+        return new MShapes(8f, 12f, 16f, 28f, 500f);
     }
 
     public static float clampRadius(float radiusPx, float widthPx, float heightPx) {

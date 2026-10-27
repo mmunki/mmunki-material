@@ -1,28 +1,30 @@
-# Aurora Material 1.0.0
+# Material Components 2.0.0
 
-A dependency-free Android view library with a calm aurora palette, custom
-drawn controls, and iOS-inspired spring motion. This is the first release of
-`tw.mmunki.material`.
+This release replaces the aurora experiment with a standard Material 3 view
+library. The palette, type scale, shape scale and motion tokens now follow the
+Material baseline, and every iOS-inspired name and style has been removed.
 
 ## Highlights
 
-- Theme system: `MTheme`, `MPalette`, `MTypography`, `MShapes`, `MMotion`.
-- Spring engine with frame-rate-independent solving and retargeting.
-- Components: `MButton`, `MCard`, `MSwitch`, `MSlider`, `MTextField`,
-  `MListSection`, `MListCell`, `MSegmentedControl`, `MProgressBar`,
-  `MCircularProgress`, `MBottomSheet`.
-- No AndroidX, no external dependencies, no library resource ids.
-- Light and dark palettes with text contrast covered by tests.
-- Primary artifact is a jar with `classes.dex` at its root; a normal classes
-  jar and an AAR are included for regular Android integration.
+- Material 3 baseline light and dark color roles, with no gradients and no
+  glass surfaces.
+- Rebuilt slider: flat 4 dp track, 20 dp handle, discrete tick marks, RTL
+  support, keyboard control and accessibility actions.
+- New components, each in its own file: `TopAppBar`, `BottomNavigationBar`,
+  `FloatingNavigationBar`, `FloatingActionButton` and `RecyclerView`.
+- Clean component package: `tw.mmunki.material.component`. The old `M*`
+  classes remain as deprecated aliases in `tw.mmunki.material.view`.
+- Flat Material 3 buttons, cards, switches, segmented controls, progress
+  indicators, text fields, lists and bottom sheets.
+- No AndroidX, no external dependencies and no library resource ids.
 
 ## Artifacts
 
-- `mmunki-material-1.0.0.jar` — dex jar, `classes.dex` at the root.
-- `mmunki-material-1.0.0-classes.jar` — JVM class files.
-- `mmunki-material-1.0.0.aar` — Android library archive.
-- `mmunki-material-1.0.0-sample.apk` — signed demo app.
-- `mmunki-material-1.0.0-source.tar.gz` — source for the tagged commit.
+- `mmunki-material-2.0.0.jar` - dex jar with `classes.dex` at the root.
+- `mmunki-material-2.0.0-classes.jar` - JVM class files.
+- `mmunki-material-2.0.0.aar` - Android library archive.
+- `mmunki-material-2.0.0-sample.apk` - signed demo app.
+- `mmunki-material-2.0.0-source.tar.gz` - source for the tagged commit.
 
 ## Compatibility
 
@@ -35,35 +37,20 @@ drawn controls, and iOS-inspired spring motion. This is the first release of
 
 | Check | Result |
 | --- | --- |
-| Pure JVM tests | 14 passed |
-| Dex jar | `classes.dex` at root, 65 classes, no `R` references |
+| Pure JVM tests | passed |
+| Dex jar | `classes.dex` at root, no `R` references |
 | DEX generation | `--min-api 21` passed, `--min-api 36` passed |
-| API compile matrix | 18 installed platforms from API 34 through 37.2 passed |
+| API compile matrix | every installed platform from API 34 through 37.2 passed |
 | Sample APK signature | `apksigner verify` passed |
 | Sample APK metadata | package `tw.mmunki.material.sample`, minSdk 21, targetSdk 36, launchable activity present |
 | Native ABI matrix | not applicable, the library has no native code |
-
-The API compile matrix covers `android-34`, `android-34-ext8/10/11/12`,
-`android-35`, `android-35-ext14/15`, `android-36`, `android-36-ext18/19`,
-`android-36.1`, `android-37.0`, `android-37.1`, and
-`android-37.2-beta1/2/3`, and `android-37.2`.
 
 ## Install
 
 ```groovy
 dependencies {
-    implementation files('libs/mmunki-material-1.0.0.aar')
+    implementation files('libs/mmunki-material-2.0.0.aar')
 }
-```
-
-For dex loading:
-
-```java
-DexClassLoader loader = new DexClassLoader(
-        jarPath,
-        getCodeCacheDir().getAbsolutePath(),
-        null,
-        getClassLoader());
 ```
 
 ## Source and verification

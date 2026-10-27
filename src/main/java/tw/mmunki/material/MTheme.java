@@ -3,12 +3,18 @@ package tw.mmunki.material;
 import android.content.Context;
 import android.content.res.Configuration;
 
+/**
+ * Process-wide Material theme: color roles, type scale, shape scale and
+ * motion tokens.
+ */
 public final class MTheme {
 
     private static final MTheme LIGHT =
-            new MTheme(MPalette.light(), MTypography.aurora(), MShapes.aurora(), MMotion.aurora());
+            new MTheme(MPalette.light(), MTypography.standard(), MShapes.standard(),
+                    MMotion.standard());
     private static final MTheme DARK =
-            new MTheme(MPalette.dark(), MTypography.aurora(), MShapes.aurora(), MMotion.aurora());
+            new MTheme(MPalette.dark(), MTypography.standard(), MShapes.standard(),
+                    MMotion.standard());
 
     private static volatile MTheme global;
 

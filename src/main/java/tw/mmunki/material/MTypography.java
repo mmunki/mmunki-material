@@ -2,6 +2,10 @@ package tw.mmunki.material;
 
 import android.graphics.Typeface;
 
+/**
+ * Material 3 type scale. The roles keep their historical names so existing
+ * layouts can be migrated without a visual rewrite.
+ */
 public final class MTypography {
 
     public final MType display;
@@ -32,18 +36,18 @@ public final class MTypography {
         this.mono = mono;
     }
 
-    public static MTypography aurora() {
+    public static MTypography standard() {
         return new MTypography(
-                new MType(34f, "sans-serif", Typeface.BOLD, -0.02f, 40f),
-                new MType(28f, "sans-serif", Typeface.BOLD, -0.015f, 34f),
-                new MType(22f, "sans-serif-medium", Typeface.NORMAL, -0.01f, 28f),
-                new MType(20f, "sans-serif-medium", Typeface.NORMAL, -0.005f, 26f),
-                new MType(17f, "sans-serif", Typeface.NORMAL, 0f, 24f),
-                new MType(16f, "sans-serif", Typeface.NORMAL, 0f, 22f),
-                new MType(15f, "sans-serif-medium", Typeface.NORMAL, 0f, 20f),
-                new MType(13f, "sans-serif", Typeface.NORMAL, 0.01f, 18f),
+                new MType(36f, "sans-serif", Typeface.NORMAL, 0f, 44f),
+                new MType(28f, "sans-serif", Typeface.NORMAL, 0f, 36f),
+                new MType(24f, "sans-serif", Typeface.NORMAL, 0f, 32f),
+                new MType(20f, "sans-serif-medium", Typeface.NORMAL, 0f, 28f),
+                new MType(16f, "sans-serif", Typeface.NORMAL, 0.01f, 24f),
+                new MType(14f, "sans-serif", Typeface.NORMAL, 0.01f, 20f),
+                new MType(14f, "sans-serif-medium", Typeface.NORMAL, 0.01f, 20f),
                 new MType(12f, "sans-serif", Typeface.NORMAL, 0.02f, 16f),
-                new MType(17f, "sans-serif-medium", Typeface.NORMAL, 0.01f, 22f),
+                new MType(11f, "sans-serif", Typeface.NORMAL, 0.02f, 16f),
+                new MType(14f, "sans-serif-medium", Typeface.NORMAL, 0.01f, 20f),
                 new MType(14f, "monospace", Typeface.NORMAL, 0f, 20f));
     }
 }

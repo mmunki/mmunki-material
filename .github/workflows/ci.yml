@@ -40,6 +40,6 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: mmunki-material-1.0.0
+          name: mmunki-material-2.0.0
           path: dist/*
           if-no-files-found: error

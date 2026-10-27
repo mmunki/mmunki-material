@@ -3,40 +3,44 @@ package tw.mmunki.material;
 import tw.mmunki.material.motion.Easing;
 import tw.mmunki.material.motion.SpringSpec;
 
+/**
+ * Motion tokens. Springs are used for values that track a finger, while the
+ * easing curves are used for finite transitions.
+ */
 public final class MMotion {
 
     public final SpringSpec press;
     public final SpringSpec snappy;
     public final SpringSpec settle;
     public final SpringSpec page;
-    public final SpringSpec bouncy;
+    public final SpringSpec expressive;
     public final SpringSpec gentle;
     public final Easing standard;
     public final Easing emphasized;
     public final Easing decelerate;
 
     public MMotion(SpringSpec press, SpringSpec snappy, SpringSpec settle, SpringSpec page,
-                   SpringSpec bouncy, SpringSpec gentle, Easing standard, Easing emphasized,
+                   SpringSpec expressive, SpringSpec gentle, Easing standard, Easing emphasized,
                    Easing decelerate) {
         this.press = press;
         this.snappy = snappy;
         this.settle = settle;
         this.page = page;
-        this.bouncy = bouncy;
+        this.expressive = expressive;
         this.gentle = gentle;
         this.standard = standard;
         this.emphasized = emphasized;
         this.decelerate = decelerate;
     }
 
-    public static MMotion aurora() {
+    public static MMotion standard() {
         return new MMotion(
-                SpringSpec.fromResponse(0.22f, 0.78f),
-                SpringSpec.fromResponse(0.30f, 0.88f),
-                SpringSpec.fromResponse(0.38f, 0.92f),
-                SpringSpec.fromResponse(0.55f, 0.95f),
-                SpringSpec.fromResponse(0.45f, 0.62f),
-                SpringSpec.fromResponse(0.65f, 1.0f),
+                SpringSpec.fromResponse(0.18f, 1.0f),
+                SpringSpec.fromResponse(0.28f, 0.92f),
+                SpringSpec.fromResponse(0.38f, 0.96f),
+                SpringSpec.fromResponse(0.48f, 0.96f),
+                SpringSpec.fromResponse(0.42f, 0.70f),
+                SpringSpec.fromResponse(0.60f, 1.0f),
                 Easing.STANDARD,
                 Easing.EMPHASIZED,
                 Easing.DECELERATE);

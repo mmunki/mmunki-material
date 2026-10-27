@@ -1,5 +1,12 @@
 package tw.mmunki.material;
 
+/**
+ * Material 3 color roles used by the library.
+ *
+ * <p>The palettes follow the Material 3 baseline light and dark schemes. They
+ * are plain color values so the library does not need Android resources or a
+ * dependency on Material Components.</p>
+ */
 public final class MPalette {
 
     public final int background;
@@ -20,10 +27,7 @@ public final class MPalette {
     public final int success;
     public final int warning;
     public final int danger;
-    public final int glass;
     public final int scrim;
-    public final int gradientStart;
-    public final int gradientEnd;
 
     private MPalette(Builder builder) {
         background = builder.background;
@@ -44,10 +48,7 @@ public final class MPalette {
         success = builder.success;
         warning = builder.warning;
         danger = builder.danger;
-        glass = builder.glass;
         scrim = builder.scrim;
-        gradientStart = builder.gradientStart;
-        gradientEnd = builder.gradientEnd;
     }
 
     public static Builder builder() {
@@ -56,81 +57,72 @@ public final class MPalette {
 
     public static MPalette light() {
         return builder()
-                .background(0xFFF4F5FA)
-                .surface(0xFFFFFFFF)
-                .surfaceElevated(0xFFFFFFFF)
-                .surfaceSunken(0xFFECEEF6)
-                .fill(0xFFE9EBF4)
-                .label(0xFF11121A)
-                .labelSecondary(0xFF5A5D70)
-                .labelTertiary(0xFF6C6F82)
-                .separator(0xFFD9DCE8)
-                .primary(0xFF5A5CF5)
+                .background(0xFFFFFBFE)
+                .surface(0xFFFFFBFE)
+                .surfaceElevated(0xFFF3EDF7)
+                .surfaceSunken(0xFFECE6F0)
+                .fill(0xFFE6E0E9)
+                .label(0xFF1C1B1F)
+                .labelSecondary(0xFF49454F)
+                .labelTertiary(0xFF6F6A75)
+                .separator(0xFFCAC4D0)
+                .primary(0xFF6750A4)
                 .onPrimary(0xFFFFFFFF)
-                .primaryContainer(0xFFE7E6FF)
-                .onPrimaryContainer(0xFF2A2A6E)
-                .secondary(0xFF0A7F75)
+                .primaryContainer(0xFFEADDFF)
+                .onPrimaryContainer(0xFF21005D)
+                .secondary(0xFF625B71)
                 .onSecondary(0xFFFFFFFF)
-                .success(0xFF2FBF71)
-                .warning(0xFFF5A623)
-                .danger(0xFFD63C44)
-                .glass(0xBFFFFFFF)
+                .success(0xFF2E6B34)
+                .warning(0xFF8A5300)
+                .danger(0xFFB3261E)
                 .scrim(0xFF000000)
-                .gradientStart(0xFF4B4BE0)
-                .gradientEnd(0xFF087A72)
                 .build();
     }
 
     public static MPalette dark() {
         return builder()
-                .background(0xFF0B0C12)
-                .surface(0xFF14151D)
-                .surfaceElevated(0xFF1D1F29)
-                .surfaceSunken(0xFF08090E)
-                .fill(0xFF242633)
-                .label(0xFFF6F7FB)
-                .labelSecondary(0xFFA6A9BA)
-                .labelTertiary(0xFF7E8194)
-                .separator(0xFF2C2E3B)
-                .primary(0xFF8B8CFF)
-                .onPrimary(0xFF0E0F16)
-                .primaryContainer(0xFF26265A)
-                .onPrimaryContainer(0xFFD9D9FF)
-                .secondary(0xFF3DDBCB)
-                .onSecondary(0xFF062A27)
-                .success(0xFF45D483)
-                .warning(0xFFFFC15E)
-                .danger(0xFFFF7A80)
-                .glass(0xB31D1F29)
+                .background(0xFF141218)
+                .surface(0xFF1C1B1F)
+                .surfaceElevated(0xFF2B2930)
+                .surfaceSunken(0xFF0F0D13)
+                .fill(0xFF36343B)
+                .label(0xFFE6E0E9)
+                .labelSecondary(0xFFCAC4D0)
+                .labelTertiary(0xFF938F99)
+                .separator(0xFF49454F)
+                .primary(0xFFD0BCFF)
+                .onPrimary(0xFF381E72)
+                .primaryContainer(0xFF4F378B)
+                .onPrimaryContainer(0xFFEADDFF)
+                .secondary(0xFFCCC2DC)
+                .onSecondary(0xFF332D41)
+                .success(0xFF8FD99A)
+                .warning(0xFFFFB95C)
+                .danger(0xFFFFB4AB)
                 .scrim(0xFF000000)
-                .gradientStart(0xFF8B8CFF)
-                .gradientEnd(0xFF3DDBCB)
                 .build();
     }
 
     public static final class Builder {
-        private int background = 0xFFF4F5FA;
-        private int surface = 0xFFFFFFFF;
-        private int surfaceElevated = 0xFFFFFFFF;
-        private int surfaceSunken = 0xFFECEEF6;
-        private int fill = 0xFFE9EBF4;
-        private int label = 0xFF11121A;
-        private int labelSecondary = 0xFF5A5D70;
-        private int labelTertiary = 0xFF6C6F82;
-        private int separator = 0xFFD9DCE8;
-        private int primary = 0xFF5A5CF5;
+        private int background = 0xFFFFFBFE;
+        private int surface = 0xFFFFFBFE;
+        private int surfaceElevated = 0xFFF3EDF7;
+        private int surfaceSunken = 0xFFECE6F0;
+        private int fill = 0xFFE6E0E9;
+        private int label = 0xFF1C1B1F;
+        private int labelSecondary = 0xFF49454F;
+        private int labelTertiary = 0xFF6F6A75;
+        private int separator = 0xFFCAC4D0;
+        private int primary = 0xFF6750A4;
         private int onPrimary = 0xFFFFFFFF;
-        private int primaryContainer = 0xFFE7E6FF;
-        private int onPrimaryContainer = 0xFF2A2A6E;
-        private int secondary = 0xFF0A7F75;
+        private int primaryContainer = 0xFFEADDFF;
+        private int onPrimaryContainer = 0xFF21005D;
+        private int secondary = 0xFF625B71;
         private int onSecondary = 0xFFFFFFFF;
-        private int success = 0xFF2FBF71;
-        private int warning = 0xFFF5A623;
-        private int danger = 0xFFD63C44;
-        private int glass = 0xBFFFFFFF;
+        private int success = 0xFF2E6B34;
+        private int warning = 0xFF8A5300;
+        private int danger = 0xFFB3261E;
         private int scrim = 0xFF000000;
-        private int gradientStart = 0xFF4B4BE0;
-        private int gradientEnd = 0xFF087A72;
 
         public Builder background(int color) {
             background = color;
@@ -222,23 +214,8 @@ public final class MPalette {
             return this;
         }
 
-        public Builder glass(int color) {
-            glass = color;
-            return this;
-        }
-
         public Builder scrim(int color) {
             scrim = color;
-            return this;
-        }
-
-        public Builder gradientStart(int color) {
-            gradientStart = color;
-            return this;
-        }
-
-        public Builder gradientEnd(int color) {
-            gradientEnd = color;
             return this;
         }
 

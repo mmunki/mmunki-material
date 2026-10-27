@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT"
 
-VERSION="${VERSION:-1.0.0}"
+VERSION="${VERSION:-2.0.0}"
 NAME="mmunki-material-$VERSION"
 DIST="$ROOT/dist"
 BUILD="$ROOT/build"

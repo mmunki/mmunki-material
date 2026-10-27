@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT"
 
-VERSION="${VERSION:-1.0.0}"
+VERSION="${VERSION:-2.0.0}"
 NAME="mmunki-material-$VERSION"
 SDK="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
 BUILD_API="${BUILD_API:-36}"

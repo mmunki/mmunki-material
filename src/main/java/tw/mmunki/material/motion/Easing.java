@@ -6,7 +6,8 @@ public final class Easing {
     public static final Easing EMPHASIZED = new Easing(0.05f, 0.7f, 0.1f, 1.0f);
     public static final Easing DECELERATE = new Easing(0.0f, 0.0f, 0.2f, 1.0f);
     public static final Easing ACCELERATE = new Easing(0.4f, 0.0f, 1.0f, 1.0f);
-    public static final Easing IOS = new Easing(0.25f, 0.1f, 0.25f, 1.0f);
+    public static final Easing LINEAR_OUT_SLOW_IN = new Easing(0.0f, 0.0f, 0.2f, 1.0f);
+    public static final Easing FAST_OUT_SLOW_IN = new Easing(0.4f, 0.0f, 0.2f, 1.0f);
 
     private final double x1;
     private final double y1;

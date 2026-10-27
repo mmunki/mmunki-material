@@ -1,43 +1,57 @@
-# Aurora Material for Android
+# Material Components for Android
 
-`tw.mmunki.material` is a dependency-free Android view library with a calm,
-iOS-inspired motion model and an original aurora palette. It is not a fork of
-Miuix; it is a small, self-contained material system in the same spirit: one
-theme, one set of shapes, one motion language, and controls that are drawn
-entirely by the library.
+`tw.mmunki.material` is a dependency-free Android view library that implements
+the Material 3 color, type, shape and motion tokens together with a set of
+components drawn entirely by the library.
+
+There is no AndroidX dependency, no Material Components dependency and no
+library resource ids. Colors, shapes and widgets are created in code.
 
 - **Package:** `tw.mmunki.material`
-- **Version:** `1.0.0`
+- **Version:** `2.0.0`
 - **Minimum Android:** 5.0 (API 21)
 - **Compile SDK:** 36
-- **Dependencies:** none (no AndroidX, no external libraries)
-- **Resources:** the library has no resource ids; every color, shape and
-  drawable is created in code.
+- **Dependencies:** none
+- **Resources:** none; every drawable is built in code
+
+## What changed in 2.0.0
+
+- Removed the aurora palette and all iOS-inspired naming and styling.
+- The default theme is the Material 3 baseline light and dark scheme.
+- The slider was rebuilt as a Material 3 slider: flat 4 dp track, 20 dp
+  handle, optional tick marks for discrete steps, RTL layout, keyboard
+  support and accessibility actions.
+- Added `TopAppBar`, `BottomNavigationBar`, `FloatingNavigationBar`,
+  `FloatingActionButton` and `RecyclerView`, each in its own file.
+- Every component now has a plain, professional class name in the
+  `tw.mmunki.material.component` package.
+- The old `M*` classes in `tw.mmunki.material.view` are kept as deprecated
+  source-compatible aliases.
 
 ## Artifacts
 
-The release contains:
+Every release contains:
 
 | Artifact | Purpose |
 | --- | --- |
-| `mmunki-material-1.0.0.jar` | A jar with `classes.dex` at its root. Use this when the issue or the loader asks for a dex jar. |
-| `mmunki-material-1.0.0-classes.jar` | The same API as normal JVM class files. Useful for a classpath or for building an AAR yourself. |
-| `mmunki-material-1.0.0.aar` | Android library archive with `classes.jar` and a library manifest. |
-| `mmunki-material-1.0.0-sample.apk` | Signed demo application that exercises every component. |
-| `mmunki-material-1.0.0-source.tar.gz` | Source archive for the tagged commit. |
+| `mmunki-material-2.0.0.jar` | A jar with `classes.dex` at its root. |
+| `mmunki-material-2.0.0-classes.jar` | The same API as JVM class files. |
+| `mmunki-material-2.0.0.aar` | Android library archive with `classes.jar`. |
+| `mmunki-material-2.0.0-sample.apk` | Signed demo application. |
+| `mmunki-material-2.0.0-source.tar.gz` | Source archive for the tagged commit. |
 
-The `.jar`, `.aar` and `.apk` are build outputs. They are published as release
-assets and are never committed to the source tree.
+Build output is published as release assets and is never committed to the
+source tree.
 
 ## Install
 
 ### AAR
 
-Copy `mmunki-material-1.0.0.aar` into `app/libs/` and add:
+Copy `mmunki-material-2.0.0.aar` into `app/libs/` and add:
 
 ```groovy
 dependencies {
-    implementation files('libs/mmunki-material-1.0.0.aar')
+    implementation files('libs/mmunki-material-2.0.0.aar')
 }
 ```
 
@@ -45,13 +59,14 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation files('libs/mmunki-material-1.0.0-classes.jar')
+    implementation files('libs/mmunki-material-2.0.0-classes.jar')
 }
 ```
 
 ### Dex jar
 
-The jar contains `classes.dex`, so it can be handed directly to a dex loader:
+The jar contains `classes.dex` at its root, so it can be handed to a dex
+loader:
 
 ```java
 DexClassLoader loader = new DexClassLoader(
@@ -59,7 +74,7 @@ DexClassLoader loader = new DexClassLoader(
         getCodeCacheDir().getAbsolutePath(),
         null,
         getClassLoader());
-Class<?> buttonClass = loader.loadClass("tw.mmunki.material.view.MButton");
+Class<?> buttonClass = loader.loadClass("tw.mmunki.material.component.Button");
 ```
 
 The dex is built with `--min-api 21` and uses dex format 035.
@@ -67,88 +82,84 @@ The dex is built with `--min-api 21` and uses dex format 035.
 ## Theme
 
 ```java
-MTheme theme = MTheme.get(this);        // system light/dark
+MTheme theme = MTheme.get(this);        // follows light/dark mode
 MTheme.setDefault(MTheme.dark());      // force a theme for the process
 MTheme.clearDefault();                 // return to the system theme
 ```
 
-`MTheme` exposes `palette`, `typography`, `shapes` and `motion`. A custom theme
-is just a constructor call:
+`MTheme` exposes `palette`, `typography`, `shapes` and `motion`. A custom
+theme is a constructor call:
 
 ```java
 MTheme custom = new MTheme(
         MPalette.builder()
                 .primary(0xFF4F46E5)
-                .background(0xFFF7F7FB)
+                .background(0xFFFFFBFE)
                 .build(),
-        MTypography.aurora(),
-        MShapes.aurora(),
-        MMotion.aurora());
+        MTypography.standard(),
+        MShapes.standard(),
+        MMotion.standard());
 ```
 
-The default palettes are checked for text contrast against their backgrounds
-in the test suite. `MTheme.get` returns the process-wide default when one is
-set, otherwise it follows `Configuration.UI_MODE_NIGHT_YES`.
+The light and dark palettes use the Material 3 baseline roles. Text contrast
+is covered by the test suite.
 
 ## Components
 
 ### Button
 
 ```java
-MButton button = new MButton(this);
+Button button = new Button(this);
 button.setText("Continue");
-button.setVariant(MButton.Variant.PRIMARY); // PRIMARY, SECONDARY, TONAL, GHOST, DANGER
-button.setCornerRadiusDp(18f);
+button.setVariant(Button.Variant.PRIMARY); // PRIMARY, TONAL, SECONDARY, GHOST, DANGER
+button.setCornerRadiusDp(20f);
 button.setIcon(getDrawable(R.drawable.ic_arrow));
 button.setOnClickListener(v -> openNextScreen());
-```
-
-Variants: `PRIMARY`, `SECONDARY`, `TONAL`, `GHOST`, `DANGER`. Buttons use a
-spring press scale, a ripple that follows the pointer, and a built-in loading
-state:
-
-```java
 button.setLoading(true);
 ```
+
+Variants map to the filled, tonal, outlined and text button styles. There is
+no gradient and no press transform; state is communicated with the Material
+ripple and state layer.
 
 ### Card
 
 ```java
-MCard card = new MCard(this);
+Card card = new Card(this);
 card.setInteractive(true);
-card.setGlass(true);
-card.setCornerRadiusDp(26f);
+card.setElevated(true);
+card.setCornerRadiusDp(16f);
 card.addView(content);
 ```
 
-A card can be a plain surface or an interactive, pressable surface. Glass mode
-uses a translucent surface and a soft border.
-
-### Switch
-
-```java
-MSwitch toggle = new MSwitch(this);
-toggle.setChecked(true, false);
-toggle.setOnCheckedChangeListener((view, checked) -> apply(checked));
-```
-
-The switch supports tap and horizontal drag, a spring thumb, and exposes its
-checked state to accessibility services.
+An outlined card is the default. `setElevated(true)` uses a filled surface
+with a small elevation.
 
 ### Slider
 
 ```java
-MSlider slider = new MSlider(this);
-slider.setRange(0f, 1f);
-slider.setStepSize(0.05f);
-slider.setValue(0.4f, true);
-slider.setOnValueChangeListener((view, value) -> setVolume(value));
+Slider slider = new Slider(this);
+slider.setRange(0f, 100f);
+slider.setStepSize(10f);      // discrete steps also draw tick marks
+slider.setValue(40f, true);
+slider.setOnValueChangeListener((view, value, fromUser) -> setVolume(value));
+```
+
+The slider has a flat track, a 20 dp handle, optional tick marks, correct RTL
+mapping, keyboard arrow support and accessibility scroll actions.
+
+### Switch
+
+```java
+Switch toggle = new Switch(this);
+toggle.setChecked(true, false);
+toggle.setOnCheckedChangeListener((view, checked) -> apply(checked));
 ```
 
 ### Text field
 
 ```java
-MTextField field = new MTextField(this);
+TextField field = new TextField(this);
 field.setLabel("Email address");
 field.setInputType(InputType.TYPE_CLASS_TEXT
         | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
@@ -156,30 +167,10 @@ field.setError("Enter a complete email address");
 field.clearError();
 ```
 
-The label floats with a spring when the field gains focus or has text. The
-outline, fill and label color follow the focus progress.
-
-### Grouped list
-
-```java
-MListSection section = new MListSection(this);
-MListCell profile = section.addCell("Profile", "Mmunki");
-profile.setLeadingIcon(getDrawable(R.drawable.ic_person));
-profile.setChevronVisible(true);
-
-MListCell notifications = section.addCell("Notifications", "Immediate");
-notifications.setTrailingText("On");
-notifications.setChevronVisible(false);
-```
-
-Cells can carry a leading icon, trailing text, a chevron, or a custom accessory
-view. The section owns the rounded background and clips the first and last
-cell corners.
-
 ### Segmented control
 
 ```java
-MSegmentedControl segments = new MSegmentedControl(this);
+SegmentedControl segments = new SegmentedControl(this);
 segments.setItems("Day", "Week", "Month");
 segments.setSelectedIndex(0, false);
 segments.setOnSelectionChangedListener((view, index) -> load(index));
@@ -188,61 +179,109 @@ segments.setOnSelectionChangedListener((view, index) -> load(index));
 ### Progress
 
 ```java
-MProgressBar bar = new MProgressBar(this);
-bar.setProgress(0.62f);          // animated
-bar.setProgressImmediate(0.62f); // no animation
+LinearProgressIndicator bar = new LinearProgressIndicator(this);
+bar.setProgress(0.62f);
+bar.setProgressImmediate(0.62f);
 
-MCircularProgress ring = new MCircularProgress(this);
+CircularProgressIndicator ring = new CircularProgressIndicator(this);
 ring.setProgress(0.72f);
 ring.setIndeterminate(true);
+```
+
+### Top app bar
+
+```java
+TopAppBar appBar = new TopAppBar(this);
+appBar.setTitle("Inbox");
+appBar.setSubtitle("12 unread");
+appBar.setNavigationIcon(getDrawable(R.drawable.ic_menu));
+appBar.setNavigationOnClickListener(v -> openDrawer());
+appBar.addAction(getDrawable(R.drawable.ic_search), v -> search());
+appBar.onScroll(scrollY); // raises the bar once the content scrolls
+```
+
+### Bottom navigation bar
+
+```java
+BottomNavigationBar navigation = new BottomNavigationBar(this);
+navigation.addItem("Home", getDrawable(R.drawable.ic_home));
+navigation.addItem("Inbox", getDrawable(R.drawable.ic_inbox)).setBadge(3);
+navigation.addItem("Settings", getDrawable(R.drawable.ic_settings));
+navigation.setSelectedItem(0, false);
+navigation.setOnItemSelectedListener((bar, index) -> show(index));
+```
+
+### Floating navigation bar
+
+```java
+FloatingNavigationBar navigation = new FloatingNavigationBar(this);
+navigation.addItem("Inbox", getDrawable(R.drawable.ic_inbox));
+navigation.addItem("Search", getDrawable(R.drawable.ic_search));
+navigation.addItem("Account", getDrawable(R.drawable.ic_person));
+```
+
+A pill-shaped, raised variant of the bottom navigation bar with a 12 dp inset
+from the edges.
+
+### Floating action button
+
+```java
+FloatingActionButton fab = new FloatingActionButton(this);
+fab.setImageDrawable(getDrawable(R.drawable.ic_add));
+fab.setOnClickListener(v -> compose());
+
+fab.setText("Compose"); // extended FAB
+fab.setExtended(true);
+```
+
+### Recycler view
+
+```java
+RecyclerView recycler = new RecyclerView(this);
+recycler.setLayoutManager(new RecyclerView.LinearLayoutManager(this));
+recycler.setItemSpacingDp(8f);
+recycler.setAdapter(new Adapter<Holder>() { /* ... */ });
+```
+
+The recycler view is a small, dependency-free linear list with a holder
+adapter, a scrap pool, drag scrolling and fling. It supports vertical and
+horizontal orientation.
+
+### List section
+
+```java
+ListSection section = new ListSection(this);
+ListCell profile = section.addCell("Profile", "Mmunki");
+profile.setLeadingIcon(getDrawable(R.drawable.ic_person));
+profile.setChevronVisible(true);
 ```
 
 ### Bottom sheet
 
 ```java
-MBottomSheet sheet = new MBottomSheet(this);
+BottomSheet sheet = new BottomSheet(this);
 sheet.setContent(content);
 sheet.show();
-
-// or
-MBottomSheet.show(this, content);
 ```
-
-The sheet follows a downward drag on its handle and hands the remaining
-distance to a spring. It animates the window dim and can be dismissed with the
-back button, the scrim, or `dismiss()`.
 
 ## Motion
 
-`MMotion` provides named springs:
+`MMotion` provides named springs and easing curves. Springs are solved in
+`SpringSolver` with a fixed 1 ms integration step, so the result is frame-rate
+independent. The standard tokens are critically damped or close to it and are
+used for finite transitions:
 
 | Field | Character |
 | --- | --- |
-| `press` | quick, slightly bouncy press response |
+| `press` | quick state response |
 | `snappy` | fast UI transitions |
 | `settle` | default settle |
-| `page` | slower page transitions |
-| `bouncy` | expressive overshoot |
+| `page` | page and sheet transitions |
+| `expressive` | slight overshoot for expressive moments |
 | `gentle` | long, calm settle |
 
-Springs are solved in `SpringSolver` with a fixed 1 ms integration step, so the
-result is frame-rate independent. `MSpring` can drive any float value:
-
-```java
-new MSpring().start(0f, 1f, MTheme.get(this).motion.settle,
-        new MSpring.Listener() {
-            @Override public void onUpdate(float value) {
-                view.setAlpha(value);
-            }
-            @Override public void onEnd() {
-                view.setAlpha(1f);
-            }
-        });
-```
-
-`Easing` includes standard, emphasized, decelerate, accelerate and an
-iOS-style curve. `MAnimations.fadeUp` and `MAnimations.stagger` provide simple
-entrance animations for groups.
+`Easing` provides the Material standard, emphasized, decelerate, accelerate,
+linear-out-slow-in and fast-out-slow-in curves.
 
 ## Build and test
 
@@ -262,13 +301,13 @@ checks the produced jars, dex, AAR and APK.
 
 Test coverage:
 
-- 14 pure JVM tests: spring settling, critical and bouncy springs, frame-rate
-  independence, retargeting, easing endpoints and monotonicity, color blending,
-  alpha compositing, contrast ratio, shape clamping, and palette contrast.
-- Dex jar: `classes.dex` at the root, 65 classes, no generated `R` references.
+- Pure JVM tests: spring settling, critical and expressive springs,
+  frame-rate independence, retargeting, easing endpoints and monotonicity,
+  color blending, alpha compositing, contrast ratio, shape clamping and
+  palette contrast.
+- Dex jar: `classes.dex` at the root, no generated `R` references.
 - DEX min-api matrix: `--min-api 21` and `--min-api 36`.
-- API compile matrix: every installed `android.jar` from API 34 through 37.2,
-  including extension and beta platforms.
+- API compile matrix: every installed `android.jar` from API 34 through 37.2.
 - Sample APK: signed, package `tw.mmunki.material.sample`, minSdk 21,
   targetSdk 36, launchable activity present.
 - There are no native libraries, so there is no ABI matrix.
@@ -276,15 +315,20 @@ Test coverage:
 ## Repository layout
 
 ```
-src/main/java/tw/mmunki/material/       theme, color, motion, animations
-src/main/java/tw/mmunki/material/drawable/
-src/main/java/tw/mmunki/material/view/  buttons, cards, fields, lists, progress
-src/test/java/tw/mmunki/material/       pure JVM tests
-sample/                                  demo application
-build.sh                                 library, dex jar, AAR, sample APK
-test.sh                                  tests and artifact verification
-.github/workflows/ci.yml                 build and test on GitHub Actions
+src/main/java/tw/mmunki/material/            theme, color, motion, animations
+src/main/java/tw/mmunki/material/component/  public components
+src/main/java/tw/mmunki/material/drawable/   flat surfaces and ripple
+src/main/java/tw/mmunki/material/motion/     spring solver and easing
+src/main/java/tw/mmunki/material/view/       deprecated M* aliases
+src/test/java/tw/mmunki/material/            pure JVM tests
+sample/                                      demo application
+build.sh                                     library, dex jar, AAR, sample APK
+test.sh                                      tests and artifact verification
+.github/workflows/ci.yml                     build and test on GitHub Actions
 ```
+
+The `view.M*` classes are kept only so existing code can migrate one import at
+a time. New code should use `tw.mmunki.material.component`.
 
 ## License
 

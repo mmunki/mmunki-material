@@ -92,7 +92,7 @@ public final class TestMain {
             @Override
             public void run() {
                 Easing[] curves = {Easing.STANDARD, Easing.EMPHASIZED, Easing.DECELERATE,
-                        Easing.ACCELERATE, Easing.IOS};
+                        Easing.ACCELERATE, Easing.LINEAR_OUT_SLOW_IN, Easing.FAST_OUT_SLOW_IN};
                 for (Easing curve : curves) {
                     near(curve.get(0f), 0f, 1e-6f, "easing start");
                     near(curve.get(1f), 1f, 1e-6f, "easing end");
@@ -106,11 +106,11 @@ public final class TestMain {
             }
         });
 
-        test("ios easing midpoint", new Runnable() {
+        test("standard easing midpoint", new Runnable() {
             @Override
             public void run() {
-                float middle = Easing.IOS.get(0.5f);
-                check(middle > 0.5f && middle < 1f, "ios midpoint is not ease-out: " + middle);
+                float middle = Easing.STANDARD.get(0.5f);
+                check(middle > 0.5f && middle < 1f, "standard midpoint is not ease-out: " + middle);
             }
         });
 
@@ -208,10 +208,6 @@ public final class TestMain {
         checkContrast(palette.onPrimaryContainer, palette.primaryContainer, 4.5,
                 "onPrimaryContainer on container");
         checkContrast(palette.onSecondary, palette.secondary, 4.5, "onSecondary on secondary");
-        checkContrast(palette.onPrimary, palette.gradientStart, 4.5,
-                "onPrimary on gradient start");
-        checkContrast(palette.onPrimary, palette.gradientEnd, 4.5,
-                "onPrimary on gradient end");
         check(MaterialColor.isDark(palette.background) == dark, "palette brightness");
     }
 
